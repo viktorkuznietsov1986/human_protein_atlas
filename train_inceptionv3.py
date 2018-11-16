@@ -59,9 +59,7 @@ train_generator = generator(train_folder, train_n, data, image_shape=input_shape
 validation_generator = generator(train_folder, dev_n, data, image_shape=input_shape, batch_size=batch_size)
 
 # do the training
-#train_model(model, train_generator, validation_generator,
-#            batch_size=batch_size, train_size=len(train_n), dev_size=len(dev_n), epochs=num_epochs)
-
-model.save('test.h5')
+train_model(model, train_generator, validation_generator,
+            batch_size=batch_size, train_size=len(train_n), dev_size=len(dev_n), epochs=num_epochs)
 
 
