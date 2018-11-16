@@ -42,7 +42,7 @@ train_n, dev_n = train_test_split(train_names, test_size=0.1)
 input_shape = (512, 512)
 
 # build the model, show summary and compile
-model = build_inceptionv3_classifier(input_shape, num_classes)
+model = build_inceptionv3_classifier(input_shape, num_classes, use_dropout=True)
 model.summary()
 
 model.compile(loss=focal_loss, optimizer='adam', metrics=['accuracy', f_score])
