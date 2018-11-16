@@ -55,8 +55,8 @@ num_epochs = 50
 batch_size = 8
 
 # create generators
-train_generator = generator(input_folder, train_n, data, image_shape=input_shape, batch_size=batch_size)
-validation_generator = generator(input_folder, dev_n, data, image_shape=input_shape, batch_size=batch_size)
+train_generator = generator(train_folder, train_n, data, image_shape=input_shape, batch_size=batch_size)
+validation_generator = generator(train_folder, dev_n, data, image_shape=input_shape, batch_size=batch_size)
 
 # do the training
 train_model(model, train_generator, validation_generator,

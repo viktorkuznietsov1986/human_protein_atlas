@@ -15,7 +15,7 @@ def generator(input_dir, samples, label_dict, image_shape, batch_size=32):
             labels = []
 
             for batch_sample in batch_samples:
-                print (batch_sample)
+                #print (batch_sample)
                 image = image_preprocess(input_dir, batch_sample)
                 if image.shape != image_shape:
                     image = cv2.resize(image, image_shape)
