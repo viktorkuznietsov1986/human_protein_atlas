@@ -24,12 +24,6 @@ def build_inceptionv3_classifier(input_shape, num_classes, use_dropout=False):
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
 
-    x = Dense(100)(x)
-    if use_dropout:
-        x = Dropout(0.7)(x)
-    x = BatchNormalization()(x)
-    x = Activation('relu')(x)
-
     x = Dense(num_classes)(x)
     x = Activation('sigmoid')(x)
 

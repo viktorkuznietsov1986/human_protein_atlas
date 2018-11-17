@@ -17,7 +17,7 @@ num_classes = len(name_label_dict)
 
 # define the input file structure
 input_folder = '../input/'
-train_folder = os.path.join(input_folder, 'train/')
+train_folder = os.path.join(input_folder, 'train_scaled/')
 test_folder = os.path.join(input_folder, 'test/')
 labels_file = os.path.join(input_folder, 'train.csv')
 sample_submission_file = os.path.join(input_folder, 'sample_submission.csv')
