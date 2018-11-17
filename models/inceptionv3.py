@@ -20,7 +20,7 @@ def build_inceptionv3_classifier(input_shape, num_classes, use_dropout=False):
 
     x = Dense(200)(x)
     if use_dropout:
-        x = Dropout(0.7)(x)
+        x = Dropout(0.25)(x)
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
 
