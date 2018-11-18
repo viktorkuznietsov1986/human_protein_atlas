@@ -36,7 +36,7 @@ train_names = list({f[:36] for f in os.listdir(train_folder)})
 train_names = shuffle(train_names)
 
 # split them
-train_n, dev_n = train_test_split(train_names, test_size=0.1)
+train_n, dev_n = train_test_split(train_names, test_size=0.25)
 
 # define the input shape
 input_shape = (512, 512)
