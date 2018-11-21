@@ -11,5 +11,5 @@ def weighted_bce(target, output, pos_weight=20):
     '!!!try this out'
     w = target*pos_weight + 1
 
-    bce_loss = K.binary_crossentropy(target, output, w)
+    bce_loss = K.mean(K.binary_crossentropy(target, output, w), axis=-1)
     return bce_loss
