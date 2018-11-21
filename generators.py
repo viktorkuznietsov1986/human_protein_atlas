@@ -10,7 +10,7 @@ class DataGenerator(keras.utils.Sequence):
     def __init__(self, input_dir, samples, label_dict, image_shape, batch_size, shuffle=True, augment=False):
         self.input_dir = input_dir
         self.samples = samples
-        self.labels_dict = label_dict
+        self.label_dict = label_dict
         self.image_shape = image_shape
 
         self.shuffle = shuffle
