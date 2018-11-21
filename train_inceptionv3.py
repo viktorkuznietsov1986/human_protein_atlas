@@ -79,7 +79,7 @@ train_generator = DataGenerator(**train_params)#generator(train_folder, train_n,
 validation_generator = DataGenerator(**dev_params)#generator(train_folder, dev_n, data, image_shape=input_shape, batch_size=batch_size)
 
 # do the training
-train_model(model, train_generator, validation_generator,
+train_model(model, train_generator, validation_generator, epochs=num_epochs,
             use_multiprocessing=True, workers=4)
 
 
