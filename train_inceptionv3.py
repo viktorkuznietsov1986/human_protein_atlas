@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
 from generators import generator, DataGenerator
-from loss import focal_loss
+from loss import focal_loss, weighted_bce
 from models.inceptionv3 import build_inceptionv3_classifier
 from preprocess import name_label_dict, multihot_encode
 from scores import f_score
@@ -45,7 +45,7 @@ input_shape = (300, 300)
 model = build_inceptionv3_classifier(input_shape, num_classes, l2_coeff=0.01)
 model.summary()
 
-model.compile(loss=focal_loss, optimizer='adam', metrics=['accuracy', f_score])
+model.compile(loss=weighted_bce, optimizer='adam', metrics=['accuracy', f_score])
 
 
 # set the number of epochs
