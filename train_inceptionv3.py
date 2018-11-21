@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
-from generators import generator
+from generators import generator, DataGenerator
 from loss import focal_loss
 from models.inceptionv3 import build_inceptionv3_classifier
 from preprocess import name_label_dict, multihot_encode
@@ -39,10 +39,10 @@ train_names = shuffle(train_names)
 train_n, dev_n = train_test_split(train_names, test_size=0.25)
 
 # define the input shape
-input_shape = (512, 512)
+input_shape = (300, 300)
 
 # build the model, show summary and compile
-model = build_inceptionv3_classifier(input_shape, num_classes)
+model = build_inceptionv3_classifier(input_shape, num_classes, l2_coeff=0.01)
 model.summary()
 
 model.compile(loss=focal_loss, optimizer='adam', metrics=['accuracy', f_score])
@@ -54,12 +54,32 @@ num_epochs = 20
 # set the batch size
 batch_size = 8
 
+train_params = {
+    'input_dir':train_folder,
+    'samples': train_n,
+    'label_dict': data,
+    'image_shape': input_shape,
+    'batch_size': batch_size,
+    'augment': True,
+    'shuffle': True
+}
+
+dev_params = {
+    'input_dir':train_folder,
+    'samples': dev_n,
+    'label_dict': data,
+    'image_shape': input_shape,
+    'batch_size': batch_size,
+    'augment': False,
+    'shuffle': True
+}
+
 # create generators
-train_generator = generator(train_folder, train_n, data, image_shape=input_shape, augment=True, batch_size=batch_size)
-validation_generator = generator(train_folder, dev_n, data, image_shape=input_shape, batch_size=batch_size)
+train_generator = DataGenerator(**train_params)#generator(train_folder, train_n, data, image_shape=input_shape, augment=True, batch_size=batch_size)
+validation_generator = DataGenerator(**dev_params)#generator(train_folder, dev_n, data, image_shape=input_shape, batch_size=batch_size)
 
 # do the training
 train_model(model, train_generator, validation_generator,
-            batch_size=batch_size, train_size=len(train_n), dev_size=len(dev_n), epochs=num_epochs)
+            use_multiprocessing=True, workers=4)
 
 
