@@ -4,7 +4,7 @@ import sklearn
 from preprocess import image_preprocess
 
 
-def generator(input_dir, samples, label_dict, augment=False, batch_size=32):
+def generator(input_dir, samples, label_dict, image_shape, augment=False, batch_size=32):
     num_samples = len(samples)
 
     augment_ratio = 3 if augment else 1
@@ -21,8 +21,8 @@ def generator(input_dir, samples, label_dict, augment=False, batch_size=32):
 
             for batch_sample in batch_samples:
                 image = image_preprocess(input_dir, batch_sample)
-                if image.shape != (512, 512):
-                    image = cv2.resize(image, (512, 512))
+                if image.shape != image_shape:
+                    image = cv2.resize(image, image_shape)
 
                 label = label_dict[batch_sample]
 
