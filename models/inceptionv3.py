@@ -1,29 +1,28 @@
 from keras.models import Model
 from keras.layers import Input, Activation, Dense, Flatten, GlobalAveragePooling2D, Conv2D, MaxPooling2D, \
-    BatchNormalization, Dropout
+    BatchNormalization, Dropout, regularizers
 from keras import applications
 
 
-def build_inceptionv3_classifier(input_shape, num_classes, use_dropout=False):
+def build_inceptionv3_classifier(input_shape, num_classes, l2_coeff=0.01):
     inceptionv3 = applications.InceptionV3(include_top=False, input_shape=(input_shape[0], input_shape[1], 3))
-    inceptionv3.trainable = False
+    inceptionv3.trainable = True
 
     inputs = Input(shape=(input_shape[0], input_shape[1], 4), name='in1')
 
-    x = Conv2D(3, (1, 1), padding='same')(inputs)
+    x = Conv2D(3, (1, 1), padding='same', kernel_regularizer=regularizers.l2(l2_coeff))(inputs)
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
     x = inceptionv3(x)
     x = GlobalAveragePooling2D()(x)
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
-
-    x = Dense(200)(x)
-    if use_dropout:
-        x = Dropout(0.25)(x)
+    x = Dense(1000, kernel_regularizer=regularizers.l2(l2_coeff))(x)
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
-
+    x = Dense(400, kernel_regularizer=regularizers.l2(l2_coeff))(x)
+    x = BatchNormalization()(x)
+    x = Activation('relu')(x)
     x = Dense(num_classes)(x)
     x = Activation('sigmoid')(x)
 

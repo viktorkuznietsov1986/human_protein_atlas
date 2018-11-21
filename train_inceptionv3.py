@@ -42,20 +42,20 @@ train_n, dev_n = train_test_split(train_names, test_size=0.25)
 input_shape = (512, 512)
 
 # build the model, show summary and compile
-model = build_inceptionv3_classifier(input_shape, num_classes, use_dropout=True)
+model = build_inceptionv3_classifier(input_shape, num_classes)
 model.summary()
 
 model.compile(loss=focal_loss, optimizer='adam', metrics=['accuracy', f_score])
 
 
 # set the number of epochs
-num_epochs = 50
+num_epochs = 20
 
 # set the batch size
 batch_size = 8
 
 # create generators
-train_generator = generator(train_folder, train_n, data, image_shape=input_shape, batch_size=batch_size)
+train_generator = generator(train_folder, train_n, data, image_shape=input_shape, augment=True, batch_size=batch_size)
 validation_generator = generator(train_folder, dev_n, data, image_shape=input_shape, batch_size=batch_size)
 
 # do the training

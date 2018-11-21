@@ -4,8 +4,13 @@ import sklearn
 from preprocess import image_preprocess
 
 
-def generator(input_dir, samples, label_dict, image_shape, batch_size=32):
+def generator(input_dir, samples, label_dict, augment=False, batch_size=32):
     num_samples = len(samples)
+
+    augment_ratio = 3 if augment else 1
+
+    batch_size = batch_size // augment_ratio
+
     while 1:  # Loop forever so the generator never terminates
         sklearn.utils.shuffle(samples)
         for offset in range(0, num_samples, batch_size):
@@ -15,15 +20,22 @@ def generator(input_dir, samples, label_dict, image_shape, batch_size=32):
             labels = []
 
             for batch_sample in batch_samples:
-                #print (batch_sample)
                 image = image_preprocess(input_dir, batch_sample)
-                if image.shape != image_shape:
-                    image = cv2.resize(image, image_shape)
+                if image.shape != (512, 512):
+                    image = cv2.resize(image, (512, 512))
 
                 label = label_dict[batch_sample]
 
-                images.append(image)
-                labels.append(label)
+                if augment:
+                    flipped_horiz = cv2.flip(image, 0)
+                    flipped_vert = cv2.flip(image, 1)
+
+                    images.extend([image, flipped_horiz, flipped_vert])
+                    labels.extend([label for i in range(augment_ratio)])
+
+                else:
+                    images.append(image)
+                    labels.append(label)
 
             X_train = np.array(images)
             y_train = np.array(labels)
