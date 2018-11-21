@@ -29,7 +29,7 @@ class DataGenerator(keras.utils.Sequence):
         'Generate one batch of data'
         batch_samples = self.samples[index*self.batch_size:(index + 1)*self.batch_size]
 
-        X, y = self.__data_generation(self, batch_samples)
+        X, y = self.__data_generation(batch_samples)
 
         return X, y
 
