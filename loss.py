@@ -7,9 +7,9 @@ def focal_loss(y_true, y_pred, gamma=2, alpha=.25):
     return -K.sum(alpha * K.pow(1. - pt_1, gamma) * K.log(pt_1)) - K.sum((1-alpha) * K.pow(pt_0, gamma) * K.log(1. - pt_0))
 
 
-def weighted_bce(y_true, y_pred, pos_weight=20):
+def weighted_bce(target, output, pos_weight=20):
     '!!!try this out'
-    w = y_true*pos_weight + 1
+    w = target*pos_weight + 1
 
-    bce_loss = K.binary_cross_entropy_with_logits(y_pred, y_true, w)
+    bce_loss = K.binary_cross_entropy(target, output, w)
     return bce_loss
