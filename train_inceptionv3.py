@@ -50,7 +50,7 @@ model.compile(loss=focal_loss, optimizer=Adam(0.001), metrics=['accuracy', f_sco
 
 
 # set the number of epochs
-num_epochs = 20
+num_epochs = 1
 
 # set the batch size
 batch_size = 8
