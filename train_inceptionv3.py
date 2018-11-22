@@ -44,6 +44,9 @@ input_shape = (300, 300)
 
 # build the model, show summary and compile
 model = build_inceptionv3_classifier(input_shape, num_classes, l2_coeff=0.01)
+
+model.load_weights('model.h5')
+
 model.summary()
 
 model.compile(loss=focal_loss, optimizer=Adam(2e-2), metrics=['accuracy', f_score])
