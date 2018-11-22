@@ -46,8 +46,7 @@ input_shape = (300, 300)
 model = build_inceptionv3_classifier(input_shape, num_classes, l2_coeff=0.01)
 model.summary()
 
-#model.compile(loss=focal_loss, optimizer=Adam(2e-2), metrics=['accuracy', f_score])
-model.compile(loss=focal_loss, optimizer='adam', metrics=['accuracy', f_score])
+model.compile(loss=focal_loss, optimizer=Adam(2e-2), metrics=['accuracy', f_score])
 
 
 # set the number of epochs
