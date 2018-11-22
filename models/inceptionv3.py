@@ -6,7 +6,7 @@ from keras import applications
 
 def build_inceptionv3_classifier(input_shape, num_classes, l2_coeff=0.01):
     inceptionv3 = applications.InceptionV3(include_top=False, input_shape=(input_shape[0], input_shape[1], 3))
-    inceptionv3.trainable = True
+    inceptionv3.trainable = False
 
     inputs = Input(shape=(input_shape[0], input_shape[1], 4), name='in1')
 
