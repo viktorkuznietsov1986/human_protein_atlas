@@ -24,7 +24,7 @@ def build_inceptionv3_classifier(input_shape, num_classes, l2_coeff=0.01):
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
     x = Dense(num_classes)(x)
-    x = Activation('sigmoid')(x)
+    #x = Activation('sigmoid')(x)
 
     model = Model(inputs, x, name='inceptionv3_based_classifier')
 
