@@ -52,4 +52,6 @@ def image_preprocess(path, id):
     img = [cv2.imread(os.path.join(path, id + '_' + color + '.png'), flags).astype(np.float32) / 255 for color in
            colors]
 
-    return np.stack(img, axis=-1)
+    img[:2] += img[3] # just for test
+
+    return np.stack(img[:3], axis=-1)
