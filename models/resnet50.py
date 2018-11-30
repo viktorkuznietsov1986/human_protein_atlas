@@ -5,7 +5,7 @@ from keras import applications
 
 
 def build_resnet50_classifier(input_shape, num_classes, l2_coeff=0.01):
-    resnet = applications.resnet50(include_top=False, input_shape=(input_shape[0], input_shape[1], 3))
+    resnet = applications.resnet50.ResNet50(include_top=False, input_shape=(input_shape[0], input_shape[1], 3))
     resnet.trainable = True
 
     inputs = Input(shape=(input_shape[0], input_shape[1]), name='in1')
