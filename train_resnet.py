@@ -49,7 +49,7 @@ model = build_resnet50_classifier(input_shape, num_classes, l2_coeff=0.01)
 
 model.summary()
 
-model.compile(loss=focal_loss, optimizer=Adam(1e-3), metrics=['accuracy', f_score])
+model.compile(loss='binary_crossentropy', optimizer=Adam(1e-3), metrics=['accuracy', f_score])
 
 
 # set the number of epochs
