@@ -8,6 +8,7 @@ from sklearn.utils import shuffle
 from generators import DataGenerator
 from loss import weighted_binary_crossentropy, focal_loss
 from models.inceptionv3 import build_inceptionv3_classifier
+from models.xception import build_xception_classifier
 from preprocess import name_label_dict, multihot_encode
 from scores import f_score
 
@@ -43,7 +44,7 @@ train_n, dev_n = train_test_split(train_names, test_size=0.25)
 input_shape = (300, 300)
 
 # build the model, show summary and compile
-model = build_inceptionv3_classifier(input_shape, num_classes, l2_coeff=0.01)
+model = build_xception_classifier(input_shape, num_classes, l2_coeff=0.01)
 
 #model.load_weights('model.h5')
 

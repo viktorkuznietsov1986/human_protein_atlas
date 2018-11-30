@@ -7,7 +7,7 @@ from sklearn.utils import shuffle
 
 from generators import DataGenerator
 from loss import weighted_binary_crossentropy, focal_loss
-from models.inceptionv3 import build_inceptionv3_classifier
+from models.resnet50 import build_resnet50_classifier
 from preprocess import name_label_dict, multihot_encode
 from scores import f_score
 
@@ -43,13 +43,13 @@ train_n, dev_n = train_test_split(train_names, test_size=0.25)
 input_shape = (300, 300)
 
 # build the model, show summary and compile
-model = build_inceptionv3_classifier(input_shape, num_classes, l2_coeff=0.01)
+model = build_resnet50_classifier(input_shape, num_classes, l2_coeff=0.01)
 
 #model.load_weights('model.h5')
 
 model.summary()
 
-model.compile(loss=focal_loss, optimizer=Adam(2e-2), metrics=['accuracy', f_score])
+model.compile(loss=focal_loss, optimizer=Adam(1e-3), metrics=['accuracy', f_score])
 
 
 # set the number of epochs
