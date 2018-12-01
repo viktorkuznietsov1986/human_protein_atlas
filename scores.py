@@ -1,7 +1,8 @@
 import keras.backend as K
 import numpy as np
 
-def f_score(y_true, y_pred, threshold=0.1, beta=1):
+def f_score(y_true, logits, threshold=0.1, beta=1):
+    y_pred = K.sigmoid(logits)
 
     tp = tp_score(y_true, y_pred, threshold)
     fp = fp_score(y_true, y_pred, threshold)
@@ -57,6 +58,7 @@ def fn_score(y_true, y_pred, threshold=0.1):
     return fn
 
 def f1_macro(y_true, y_preds, thresh=0.5, eps=1e-20):
+    # need to rewrite it using Keras backend
     preds_bin = y_preds > thresh # binary representation from probabilities (not relevant)
     truepos = preds_bin * y_true
 
