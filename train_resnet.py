@@ -9,7 +9,7 @@ from generators import DataGenerator
 from loss import weighted_binary_crossentropy, focal_loss
 from models.resnet50 import build_resnet50_classifier
 from preprocess import name_label_dict, multihot_encode
-from scores import f_score
+from scores import f_score, f1_macro
 
 # define the number of classes
 from training import train_model
@@ -49,7 +49,7 @@ model = build_resnet50_classifier(input_shape, num_classes, l2_coeff=0.01)
 
 model.summary()
 
-model.compile(loss='binary_crossentropy', optimizer=Adam(1e-3), metrics=['accuracy', f_score])
+model.compile(loss=focal_loss, optimizer='adam', metrics=['accuracy', f1_macro])
 
 
 # set the number of epochs
