@@ -21,7 +21,7 @@ def build_resnet50_classifier(input_shape, num_classes, l2_coeff=0.01):
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
     x = Dense(num_classes)(x)
-    #x = Activation('sigmoid')(x)
+    x = Activation('sigmoid')(x)
 
     model = Model(inputs, x, name='resnet50_based_classifier')
 
