@@ -19,7 +19,7 @@ model = build_resnet50_classifier(input_shape, num_classes, l2_coeff=0.01)
 model.load_weights('model.h5')
 
 predicted = []
-for name in tqdm(submit['Id']):
+for name in submit['Id']:
     path = os.path.join('../input/test/', name)
     image = image_preprocess(path, input_shape)
     score_predict = model.predict(image)
