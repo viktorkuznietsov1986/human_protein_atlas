@@ -53,7 +53,7 @@ class DataGenerator(keras.utils.Sequence):
             label = self.label_dict[batch_sample]
 
             if self.augment:
-                augmented = self.augment(image)
+                augmented = self.do_augmentation(image)
 
                 images.extend([image, augmented])
                 labels.extend([label, label])
@@ -66,7 +66,7 @@ class DataGenerator(keras.utils.Sequence):
         y_train = np.array(labels)
         return sklearn.utils.shuffle(X_train, y_train)
 
-    def augment(image):
+    def do_augmentation(image):
         augment_img = iaa.Sequential([
             iaa.OneOf([
                 iaa.Affine(rotate=0),
