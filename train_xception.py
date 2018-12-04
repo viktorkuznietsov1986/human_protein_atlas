@@ -1,13 +1,10 @@
 import os
 
 import pandas as pd
-from keras.optimizers import Adam
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
 from generators import DataGenerator
-from loss import weighted_binary_crossentropy, focal_loss
-from models.inceptionv3 import build_inceptionv3_classifier
 from models.xception import build_xception_classifier
 from preprocess import name_label_dict, multihot_encode
 from scores import f_score
@@ -50,7 +47,7 @@ model = build_xception_classifier(input_shape, num_classes, l2_coeff=0.01)
 
 model.summary()
 
-model.compile(loss=focal_loss, optimizer=Adam(2e-2), metrics=['accuracy', f_score])
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy', f_score])
 
 
 # set the number of epochs
