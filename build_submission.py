@@ -25,7 +25,7 @@ for name in submit['Id']:
     image = np.reshape(image, [1, input_shape[0], input_shape[1], n_channels])
     prediction = model.predict(image)[0]
     score_predict = model.predict([image])
-    label_predict = np.arange(num_classes)[score_predict>=0.5]
+    label_predict = np.argwhere(score_predict>=0.5).flatten()
     str_predict_label = ' '.join(str(l) for l in label_predict)
     predicted.append(str_predict_label)
 
