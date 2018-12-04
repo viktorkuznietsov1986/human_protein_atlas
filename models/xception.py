@@ -17,9 +17,11 @@ def build_xception_classifier(input_shape, num_classes, l2_coeff=0.01):
     x = Dense(1024, kernel_regularizer=regularizers.l2(l2_coeff))(x)
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
+    x = Dropout(0.5)(x)
     x = Dense(512, kernel_regularizer=regularizers.l2(l2_coeff))(x)
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
+    x = Dropout(0.5)(x)
     x = Dense(num_classes)(x)
     x = Activation('sigmoid')(x)
 
