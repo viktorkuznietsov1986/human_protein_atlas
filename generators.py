@@ -17,7 +17,7 @@ class DataGenerator(keras.utils.Sequence):
         self.shuffle = shuffle
         self.augment = augment
 
-        self.augment_ratio = 3
+        self.augment_ratio = 2
         self.batch_size = batch_size if augment == False else batch_size//self.augment_ratio
 
         self.on_epoch_end()
