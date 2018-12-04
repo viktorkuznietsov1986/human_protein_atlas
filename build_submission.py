@@ -20,7 +20,7 @@ predicted = []
 for name in submit['Id']:
     image = image_preprocess('../input/test/', name)
     image = cv2.resize(image, input_shape)
-    score_predict = model.predict(image)
+    score_predict = model.predict([image])
     label_predict = np.arange(num_classes)[score_predict>=0.5]
     str_predict_label = ' '.join(str(l) for l in label_predict)
     predicted.append(str_predict_label)
