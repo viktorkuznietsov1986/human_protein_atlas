@@ -66,7 +66,7 @@ class DataGenerator(keras.utils.Sequence):
         y_train = np.array(labels)
         return sklearn.utils.shuffle(X_train, y_train)
 
-    def do_augmentation(image):
+    def do_augmentation(self, image):
         augment_img = iaa.Sequential([
             iaa.OneOf([
                 iaa.Affine(rotate=0),
