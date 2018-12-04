@@ -1,7 +1,5 @@
-import os
-
+import cv2
 import pandas as pd
-import tqdm as tqdm
 import numpy as np
 
 
@@ -20,8 +18,8 @@ model.load_weights('model.h5')
 
 predicted = []
 for name in submit['Id']:
-    path = os.path.join('../input/test/', name)
-    image = image_preprocess(path, input_shape)
+    image = image_preprocess('../input/test/', name)
+    image = cv2.resize(image, input_shape)
     score_predict = model.predict(image)
     label_predict = np.arange(num_classes)[score_predict>=0.5]
     str_predict_label = ' '.join(str(l) for l in label_predict)
