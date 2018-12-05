@@ -43,7 +43,7 @@ input_shape = (300, 300)
 # build the model, show summary and compile
 model = build_xception_classifier(input_shape, num_classes, l2_coeff=0.01)
 
-model.load_weights('model.h5')
+#model.load_weights('model.h5')
 
 model.summary()
 
@@ -51,7 +51,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy',
 
 
 # set the number of epochs
-num_epochs = 50
+num_epochs = 100
 
 # set the batch size
 batch_size = 8

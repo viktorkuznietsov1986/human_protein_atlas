@@ -52,8 +52,7 @@ def image_preprocess(path, id):
     img = [cv2.imread(os.path.join(path, id + '_' + color + '.png'), flags).astype(np.float32) / 255 for color in
            colors]
 
-    img[0] += img[3] / 3
-    img[1] += img[3] / 3
-    img[2] += img[3] / 3
+    img[0] += img[3] / 2 # add half of the yellow channel to the red channel
+    img[2] += img[3] / 2 # add hald of the yellow channel to the blue channel
 
     return np.stack(img[:3], axis=-1)

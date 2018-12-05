@@ -17,7 +17,7 @@ class DataGenerator(keras.utils.Sequence):
         self.shuffle = shuffle
         self.augment = augment
 
-        self.augment_ratio = 2
+        self.augment_ratio = 4
         self.batch_size = batch_size if augment == False else batch_size//self.augment_ratio
 
         self.on_epoch_end()
@@ -53,10 +53,8 @@ class DataGenerator(keras.utils.Sequence):
             label = self.label_dict[batch_sample]
 
             if self.augment:
-                augmented = self.do_augmentation(image)
-
-                images.extend([image, augmented])
-                labels.extend([label, label])
+                images.extend([image, self.do_augmentation(image), self.do_augmentation(image), self.do_augmentation(image)])
+                labels.extend([label, label, label, label])
 
             else:
                 images.append(image)
@@ -75,7 +73,7 @@ class DataGenerator(keras.utils.Sequence):
                 iaa.Affine(rotate=270),
                 iaa.Fliplr(0.5),
                 iaa.Flipud(0.5),
-            ])], random_order=True)
+            ])], random_state=0, random_order=True)
 
         image_aug = augment_img.augment_image(image)
         return image_aug
