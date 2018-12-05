@@ -46,7 +46,7 @@ def predict(model):
         predicted04.append(labels04)
         predicted05.append(labels05)
 
-        return predicted02, predicted03, predicted04, predicted05
+    return predicted02, predicted03, predicted04, predicted05
 
 
 predicted02, predicted03, predicted04, predicted05 = predict(model)
