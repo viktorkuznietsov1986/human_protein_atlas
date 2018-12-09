@@ -51,7 +51,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy',
 
 
 # set the number of epochs
-num_epochs = 100
+num_epochs = 50
 
 # set the batch size
 batch_size = 8

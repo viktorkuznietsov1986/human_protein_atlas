@@ -5,7 +5,7 @@ from keras import applications
 
 
 def build_xception_classifier(input_shape, num_classes, l2_coeff=0.01):
-    xception = applications.Xception(include_top=False, input_shape=(input_shape[0], input_shape[1], 3))
+    xception = applications.Xception(include_top=False, weights=None, input_shape=(input_shape[0], input_shape[1], 3))
     xception.trainable = True
 
     inputs = Input(shape=(input_shape[0], input_shape[1], 3), name='in1')
